@@ -1,0 +1,7 @@
+{
+  "name": "QuickFix Crew",
+  "description": "A modern web application for a home appliance service provider, allowing users to browse services, get their location automatically, book appointments, and chat with a virtual technician powered by Gemini.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
