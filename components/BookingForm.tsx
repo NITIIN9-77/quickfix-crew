@@ -73,7 +73,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     name,
     phone,
     address,
-    services: cart.map((item) => `${item.parentServiceName} - ${item.name} (x${item.quantity})`).join(", "),
+    services: cart.map((item) => `${item.parentServiceName} - ${item.name} (Quantity: ${item.quantity}, Price: ₹${item.price * item.quantity})`).join("; "),
     total,
   };
 
