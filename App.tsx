@@ -38,11 +38,19 @@ const App: React.FC = () => {
     }
   };
 
+  // This function is for cancelling the booking or closing the modal
   const closeBookingForm = () => {
     setIsBookingFormOpen(false);
-    setCart([]); // Clear cart after booking is submitted/closed
+    // The cart is no longer cleared here to preserve the user's selections
+  };
+  
+  // This function is called only on successful submission
+  const handleBookingSuccess = () => {
+    setIsBookingFormOpen(false);
+    setCart([]); // Clear cart after successful booking
     setSelectedService(null);
   };
+
 
   // Cart management functions
   const handleAddToCart = (subService: SubService) => {
@@ -98,6 +106,7 @@ const App: React.FC = () => {
         <BookingForm
           cart={cart}
           onClose={closeBookingForm}
+          onSuccess={handleBookingSuccess}
         />
       )}
 

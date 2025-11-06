@@ -4,14 +4,21 @@ import type { CartItem } from '../types';
 interface BookingFormProps {
   cart: CartItem[];
   onClose: () => void;
+  onSuccess: () => void;
 }
 
-const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose }) => {
+interface FormErrors {
+  phone?: string;
+}
+
+const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose, onSuccess }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [isLocating, setIsLocating] = useState(false);
-  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [submissionError, setSubmissionError] = useState('');
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -42,25 +49,57 @@ const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose }) => {
       alert("Geolocation is not supported by your browser.");
     }
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (name && phone && address) {
-      console.log({
-        services: cart,
-        total,
-        name,
-        phone,
-        address,
-      });
-      setSubmissionStatus('success');
-      setTimeout(() => {
-        onClose();
-      }, 3500); // Increased timeout to allow animations to play
-    } else {
-      alert("Please fill in all fields.");
+  
+  const validateForm = (): boolean => {
+    const errors: FormErrors = {};
+    if (!/^\d{10}$/.test(phone.replace(/\s/g, ''))) {
+      errors.phone = 'Please enter a valid 10-digit phone number.';
     }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setSubmissionError('');
+
+  if (!validateForm()) {
+    return;
+  }
+
+  setSubmissionStatus('submitting');
+
+  const formData = {
+    name,
+    phone,
+    address,
+    services: cart.map((item) => `${item.name} (x${item.quantity})`).join(", "),
+    total,
+  };
+
+  try {
+    const url = "https://script.google.com/macros/s/AKfycbzZODfZC0m82CAaiSlTFbTtI_8A48I-CeN24NSKwJ_dqH5ln_Lz7kTVOjHOrTWu9BQC/exec";
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+    });
+
+    if (!response.ok) {
+        throw new Error(`Network response was not ok. Status: ${response.status}`);
+    }
+
+    setSubmissionStatus("success");
+    setTimeout(() => {
+      onSuccess();
+    }, 5000);
+  } catch (error) {
+    console.error("Error submitting booking:", error);
+    setSubmissionError('Failed to submit booking. Please check your connection and try again.');
+    setSubmissionStatus('idle'); // Reset status to allow retry
+  }
+};
+
   
   if (submissionStatus === 'success') {
       return (
@@ -100,7 +139,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose }) => {
   return (
     <div className="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in" onClick={onClose}>
       <div className="bg-surface rounded-lg shadow-2xl p-8 w-full max-w-lg m-4 relative animate-slide-in-up" onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-200">
+        <button onClick={onClose} aria-label="Close" className="absolute top-4 right-4 text-gray-400 hover:text-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -132,6 +171,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose }) => {
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-textSecondary">Phone Number</label>
             <input type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="mt-1 block w-full px-3 py-2 bg-background border border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-primary text-textPrimary placeholder:text-slate-500" required />
+            {formErrors.phone && <p className="mt-1 text-sm text-red-400">{formErrors.phone}</p>}
           </div>
           <div>
             <label htmlFor="address" className="block text-sm font-medium text-textSecondary">Address</label>
@@ -140,9 +180,12 @@ const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose }) => {
               {isLocating ? 'Getting Location...' : 'Use My Current Location'}
             </button>
           </div>
+          {submissionError && <p className="text-red-400 text-center bg-red-500/10 p-3 rounded-md text-sm">{submissionError}</p>}
           <div className="flex justify-end pt-4">
-            <button type="button" onClick={onClose} className="bg-slate-600 text-slate-200 font-bold py-2 px-4 rounded-md mr-2 hover:bg-slate-500 transition-colors">Cancel</button>
-            <button type="submit" className="bg-primary text-slate-900 font-bold py-2 px-4 rounded-md hover:brightness-110 transition-all animate-glow">Submit Request</button>
+            <button type="button" onClick={onClose} disabled={submissionStatus === 'submitting'} className="bg-slate-600 text-slate-200 font-bold py-2 px-4 rounded-md mr-2 hover:bg-slate-500 transition-colors disabled:opacity-50">Cancel</button>
+            <button type="submit" disabled={submissionStatus === 'submitting'} className="bg-primary text-slate-900 font-bold py-2 px-6 rounded-md hover:brightness-110 transition-all animate-glow disabled:opacity-50 disabled:animate-none flex items-center justify-center min-w-[150px]">
+                {submissionStatus === 'submitting' ? 'Submitting...' : 'Submit Request'}
+            </button>
           </div>
         </form>
       </div>
