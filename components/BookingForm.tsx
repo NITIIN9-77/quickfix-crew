@@ -84,7 +84,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   };
 
   try {
-    const url = "https://script.google.com/macros/s/AKfycbzZODfZC0m82CAaiSlTFbTtI_8A48I-CeN24NSKwJ_dqH5ln_Lz7kTVOjHOrTWu9BQC/exec";
+    const url = "https://script.google.com/macros/s/AKfycbzs1zsZvTOrrklPMhU2S8XrY1pc5rTPqHSjXadiKZnsCn9EESEZ6Zq362Hq_8xMUGRP/exec";
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(formData),
