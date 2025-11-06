@@ -66,6 +66,11 @@ const handleSubmit = async (e: React.FormEvent) => {
   if (!validateForm()) {
     return;
   }
+  
+  if (!name || !phone || !address) {
+      alert("Please fill in all fields.");
+      return;
+  }
 
   setSubmissionStatus('submitting');
 
@@ -73,8 +78,9 @@ const handleSubmit = async (e: React.FormEvent) => {
     name,
     phone,
     address,
-    services: cart.map((item) => `Service: ${item.name} (Category: ${item.parentServiceName}) | Quantity: ${item.quantity} | Price: ₹${item.price * item.quantity}`).join("; "),
+    services: cart.map((item) => `${item.name} (x${item.quantity}) - ₹${item.price}`).join(", "),
     total,
+    date: new Date().toLocaleString("en-IN"),
   };
 
   try {
