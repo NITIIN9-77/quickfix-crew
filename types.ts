@@ -17,6 +17,7 @@ export interface Service {
 
 export interface CartItem extends SubService {
   quantity: number;
+  parentServiceName: string;
 }
 
 export interface ChatMessage {

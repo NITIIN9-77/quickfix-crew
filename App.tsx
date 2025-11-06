@@ -53,7 +53,7 @@ const App: React.FC = () => {
 
 
   // Cart management functions
-  const handleAddToCart = (subService: SubService) => {
+  const handleAddToCart = (subService: SubService, parentServiceName: string) => {
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === subService.id);
       if (existingItem) {
@@ -62,7 +62,7 @@ const App: React.FC = () => {
           item.id === subService.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prevCart, { ...subService, quantity: 1 }];
+      return [...prevCart, { ...subService, quantity: 1, parentServiceName }];
     });
   };
 

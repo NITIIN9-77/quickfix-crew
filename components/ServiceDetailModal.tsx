@@ -5,7 +5,7 @@ import ExplanationModal from './ExplanationModal';
 interface ServiceDetailModalProps {
   service: Service;
   cart: CartItem[];
-  onAddToCart: (subService: SubService) => void;
+  onAddToCart: (subService: SubService, parentServiceName: string) => void;
   onUpdateCartQuantity: (subServiceId: string, quantity: number) => void;
   onClose: () => void;
   onProceed: () => void;
@@ -68,7 +68,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service, cart, 
                       <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity + 1)} className="bg-primary text-slate-900 hover:brightness-110 rounded-full w-8 h-8 flex items-center justify-center transition-all font-bold">+</button>
                     </div>
                   ) : (
-                    <button onClick={() => onAddToCart(subService)} className="bg-primary/10 border border-primary/30 text-primary font-semibold py-2 px-6 rounded-full hover:bg-primary/20 hover:border-primary transition-colors">
+                    <button onClick={() => onAddToCart(subService, service.name)} className="bg-primary/10 border border-primary/30 text-primary font-semibold py-2 px-6 rounded-full hover:bg-primary/20 hover:border-primary transition-colors">
                       Add
                     </button>
                   )}
