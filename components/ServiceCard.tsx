@@ -14,7 +14,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onViewDetails }) => 
       <p className="text-textSecondary flex-grow mb-4">{service.description}</p>
       <button
         onClick={() => onViewDetails(service)}
-        className="mt-auto bg-primary/20 text-primary hover:bg-primary hover:text-slate-900 font-semibold py-2 px-6 rounded-full transition-colors duration-300"
+        className="mt-auto bg-primary/20 text-primary hover:bg-primary hover:text-white font-semibold py-2 px-6 rounded-full transition-colors duration-300"
       >
         View Services
       </button>

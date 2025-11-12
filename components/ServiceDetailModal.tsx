@@ -50,7 +50,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service, cart, 
           <div className="flex items-center">
             <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity - 1)} className="bg-slate-700 text-textSecondary hover:bg-slate-600 rounded-full w-8 h-8 flex items-center justify-center transition-colors font-bold">-</button>
             <span className="w-10 text-center font-bold text-textPrimary">{cartItem.quantity}</span>
-            <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity + 1)} className="bg-primary text-slate-900 hover:brightness-110 rounded-full w-8 h-8 flex items-center justify-center transition-all font-bold">+</button>
+            <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity + 1)} className="bg-primary text-white hover:brightness-110 rounded-full w-8 h-8 flex items-center justify-center transition-all font-bold">+</button>
           </div>
         ) : (
           <button onClick={() => onAddToCart(subService, service.name)} className="bg-primary/10 border border-primary/30 text-primary font-semibold py-2 px-6 rounded-full hover:bg-primary/20 hover:border-primary transition-colors">
@@ -98,7 +98,7 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service, cart, 
                   <p className="font-bold text-textPrimary">{totalItems} {totalItems > 1 ? 'Items' : 'Item'}</p>
                   <p className="text-primary font-bold text-lg">₹{total}</p>
                 </div>
-                <button onClick={onProceed} className="bg-primary text-slate-900 font-bold py-3 px-8 rounded-md hover:brightness-110 transition-all text-lg">
+                <button onClick={onProceed} className="bg-primary text-white font-bold py-3 px-8 rounded-md hover:brightness-110 transition-all text-lg">
                   Proceed to Book
                 </button>
               </div>

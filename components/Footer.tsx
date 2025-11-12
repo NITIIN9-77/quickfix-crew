@@ -27,13 +27,13 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
           <div className="md:col-span-1">
-            <h3 className="text-xl font-bold mb-4 text-primary">Fixitron</h3>
+            <h3 className="text-xl font-bold mb-4 text-primary">Provo</h3>
             <p className="text-textSecondary">Your trusted partner for all home repair and maintenance needs. Quality service, guaranteed.</p>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-2 text-textSecondary">
-              <li>Email: support@fixitron.com</li>
+              <li>Email: support@provo.com</li>
               <li>Phone: (123) 456-7890</li>
               <li>Address: 123 Service Lane, Your City</li>
             </ul>
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-slate-700 text-center text-textSecondary/80">
-          <p>&copy; {new Date().getFullYear()} Fixitron. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Provo. All rights reserved.</p>
         </div>
       </div>
     </footer>

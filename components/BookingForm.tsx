@@ -189,7 +189,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           {submissionError && <p className="text-red-400 text-center bg-red-500/10 p-3 rounded-md text-sm">{submissionError}</p>}
           <div className="flex justify-end pt-4">
             <button type="button" onClick={onClose} disabled={submissionStatus === 'submitting'} className="bg-slate-600 text-slate-200 font-bold py-2 px-4 rounded-md mr-2 hover:bg-slate-500 transition-colors disabled:opacity-50">Cancel</button>
-            <button type="submit" disabled={submissionStatus === 'submitting'} className="bg-primary text-slate-900 font-bold py-2 px-6 rounded-md hover:brightness-110 transition-all animate-glow disabled:opacity-50 disabled:animate-none flex items-center justify-center min-w-[150px]">
+            <button type="submit" disabled={submissionStatus === 'submitting'} className="bg-primary text-white font-bold py-2 px-6 rounded-md hover:brightness-110 transition-all animate-glow disabled:opacity-50 disabled:animate-none flex items-center justify-center min-w-[150px]">
                 {submissionStatus === 'submitting' ? 'Submitting...' : 'Submit Request'}
             </button>
           </div>
