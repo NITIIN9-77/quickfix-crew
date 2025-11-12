@@ -15,7 +15,7 @@ const getAI = () => {
   return ai;
 };
 
-const systemInstruction = `You are 'Techie', a friendly and knowledgeable virtual assistant for 'QuickFix Crew'. Your role is to help users understand our services, answer basic appliance questions, and guide them on how to book a service. Keep your answers concise, helpful, and professional. Do not perform the booking yourself, but direct them to the 'Book Now' buttons or suggest they explore the services section. Available services are AC, Fan, Wiring, Switchboards, General Appliances, and Plumbing.`;
+const systemInstruction = `You are 'Techie', a friendly and knowledgeable virtual assistant for 'Fixitron'. Your role is to help users understand our services, answer basic appliance and cleaning questions, and guide them on how to book a service or buy parts. Keep your answers concise, helpful, and professional. Do not perform the booking yourself, but direct them to the 'Book Now' buttons or suggest they explore the services section. Available services are AC, Fan, Wiring, Switchboards, General Appliances, Plumbing, and Appliance Parts.`;
 
 const initializeChat = (): Chat => {
     const aiInstance = getAI();
@@ -44,13 +44,13 @@ export const getChatResponse = async (message: string): Promise<string> => {
 export const getServiceExplanation = async (serviceName: string, subServiceName: string, price: number): Promise<string> => {
   try {
     const aiInstance = getAI();
-    const prompt = `As 'Techie', the friendly virtual assistant for 'QuickFix Crew', explain the service "${subServiceName}" which is part of our "${serviceName}" category and costs ₹${price}. Keep it simple, clear, and concise for a typical homeowner. Explain what it includes and why it's beneficial. Be reassuring and professional. Do not prompt for action or try to sell other services.`;
+    const prompt = `As 'Techie', the friendly virtual assistant for 'Fixitron', explain the service or part named "${subServiceName}" which is part of our "${serviceName}" category and costs ₹${price}. Keep it simple, clear, and concise for a typical homeowner. Explain what it includes (or what it's for, if it's a part) and why it's beneficial. Be reassuring and professional. Do not prompt for action or try to sell other services.`;
 
     const response = await aiInstance.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: prompt,
       config: {
-        systemInstruction: `You are 'Techie', a friendly and knowledgeable virtual assistant for 'QuickFix Crew'. Your goal is to provide helpful explanations.`,
+        systemInstruction: `You are 'Techie', a friendly and knowledgeable virtual assistant for 'Fixitron'. Your goal is to provide helpful explanations.`,
       },
     });
 

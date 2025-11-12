@@ -55,11 +55,13 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center group cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L4 5v6.09c0 4.97 3.58 9.38 8 10.91C16.42 20.47 20 16.06 20 11.09V5l-8-3z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M11 10V5l-4 6h4v5l4-6h-4z" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 15h18" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 18h18v3H3z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18 2.5L19 4l1-1.5L19 1l-1 1.5z" fill="currentColor" className="text-primary/70 group-hover:text-primary transition-colors" />
             </svg>
-            <span className="ml-3 text-2xl font-bold text-textPrimary transition-transform duration-300 group-hover:scale-105">QuickFix Crew</span>
+            <span className="ml-3 text-2xl font-bold text-textPrimary transition-transform duration-300 group-hover:scale-105">Fixitron</span>
           </a>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#services" className="text-textSecondary hover:text-primary transition-colors duration-200">Services</a>

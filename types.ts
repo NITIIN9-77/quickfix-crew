@@ -13,6 +13,7 @@ export interface Service {
   description: string;
   icon: React.ReactNode;
   subServices: SubService[];
+  parts?: SubService[];
 }
 
 export interface CartItem extends SubService {

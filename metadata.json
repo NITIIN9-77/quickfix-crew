@@ -1,6 +1,6 @@
 {
-  "name": "QuickFix Crew",
-  "description": "A modern web application for a home appliance service provider, allowing users to browse services, get their location automatically, book appointments, and chat with a virtual technician powered by Gemini.",
+  "name": "Fixitron",
+  "description": "A modern web application for home repair and maintenance services. Users can browse services, order genuine appliance parts, get their location automatically, book appointments, and chat with a virtual assistant powered by Gemini.",
   "requestFramePermissions": [
     "geolocation"
   ]

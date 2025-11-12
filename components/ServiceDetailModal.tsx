@@ -24,6 +24,43 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service, cart, 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  const renderServiceItem = (subService: SubService) => {
+    const cartItem = cart.find(item => item.id === subService.id);
+    return (
+      <div key={subService.id} className="flex items-center justify-between border border-slate-700/50 hover:border-primary/50 transition-colors p-3 rounded-md">
+        <div className="flex-1 pr-4">
+          <div className="flex items-center">
+            <h4 className="font-semibold text-textPrimary">{subService.name}</h4>
+            <button 
+              onClick={() => setExplainingSubService(subService)}
+              className="ml-2 text-textSecondary hover:text-primary transition-colors p-1 rounded-full"
+              aria-label={`Learn more about ${subService.name}`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button>
+          </div>
+          <p className="text-primary font-medium mt-1">₹{subService.price}</p>
+          {subService.description && (
+            <p className="text-sm text-textSecondary mt-2">{subService.description}</p>
+          )}
+        </div>
+        {cartItem ? (
+          <div className="flex items-center">
+            <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity - 1)} className="bg-slate-700 text-textSecondary hover:bg-slate-600 rounded-full w-8 h-8 flex items-center justify-center transition-colors font-bold">-</button>
+            <span className="w-10 text-center font-bold text-textPrimary">{cartItem.quantity}</span>
+            <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity + 1)} className="bg-primary text-slate-900 hover:brightness-110 rounded-full w-8 h-8 flex items-center justify-center transition-all font-bold">+</button>
+          </div>
+        ) : (
+          <button onClick={() => onAddToCart(subService, service.name)} className="bg-primary/10 border border-primary/30 text-primary font-semibold py-2 px-6 rounded-full hover:bg-primary/20 hover:border-primary transition-colors">
+            Add
+          </button>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in" onClick={onClose}>
@@ -38,43 +75,20 @@ const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service, cart, 
               </button>
           </header>
 
-          <div className="flex-grow overflow-y-auto p-6 space-y-4">
-            {service.subServices.map(subService => {
-              const cartItem = cart.find(item => item.id === subService.id);
-              return (
-                <div key={subService.id} className="flex items-center justify-between border border-slate-700/50 hover:border-primary/50 transition-colors p-3 rounded-md">
-                  <div className="flex-1 pr-4">
-                    <div className="flex items-center">
-                      <h4 className="font-semibold text-textPrimary">{subService.name}</h4>
-                      <button 
-                        onClick={() => setExplainingSubService(subService)}
-                        className="ml-2 text-textSecondary hover:text-primary transition-colors p-1 rounded-full"
-                        aria-label={`Learn more about ${subService.name}`}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </button>
-                    </div>
-                    <p className="text-primary font-medium mt-1">₹{subService.price}</p>
-                    {subService.description && (
-                      <p className="text-sm text-textSecondary mt-2">{subService.description}</p>
-                    )}
-                  </div>
-                  {cartItem ? (
-                    <div className="flex items-center">
-                      <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity - 1)} className="bg-slate-700 text-textSecondary hover:bg-slate-600 rounded-full w-8 h-8 flex items-center justify-center transition-colors font-bold">-</button>
-                      <span className="w-10 text-center font-bold text-textPrimary">{cartItem.quantity}</span>
-                      <button onClick={() => onUpdateCartQuantity(subService.id, cartItem.quantity + 1)} className="bg-primary text-slate-900 hover:brightness-110 rounded-full w-8 h-8 flex items-center justify-center transition-all font-bold">+</button>
-                    </div>
-                  ) : (
-                    <button onClick={() => onAddToCart(subService, service.name)} className="bg-primary/10 border border-primary/30 text-primary font-semibold py-2 px-6 rounded-full hover:bg-primary/20 hover:border-primary transition-colors">
-                      Add
-                    </button>
-                  )}
+          <div className="flex-grow overflow-y-auto p-6">
+            <h3 className="text-lg font-semibold text-textSecondary border-b border-slate-600 pb-2 mb-3">Available Services</h3>
+            <div className="space-y-4">
+              {service.subServices.map(renderServiceItem)}
+            </div>
+
+            {service.parts && service.parts.length > 0 && (
+              <>
+                <h3 className="text-lg font-semibold text-textSecondary border-b border-slate-600 pb-2 mb-3 mt-8">Related Spare Parts</h3>
+                <div className="space-y-4">
+                  {service.parts.map(renderServiceItem)}
                 </div>
-              );
-            })}
+              </>
+            )}
           </div>
 
           {totalItems > 0 && (

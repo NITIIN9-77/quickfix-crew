@@ -107,7 +107,6 @@ const HandymanIcon: React.FC<{className?: string}> = ({ className }) => (
     </svg>
 );
 
-
 export const SERVICES: Service[] = [
   {
     id: 'ac',
@@ -122,6 +121,12 @@ export const SERVICES: Service[] = [
       { id: 'ac-w-install', name: 'Window AC Installation', price: 799, description: 'Hassle-free installation for your new window AC unit in the designated window space.' },
       { id: 'ac-s-uninstall', name: 'Split AC Uninstallation', price: 699, description: 'Safe removal of your existing split AC, including both indoor and outdoor units.' },
       { id: 'ac-inspect', name: 'AC Repair (Inspection Fee)', price: 299, description: 'A basic visit fee for our technician to diagnose the issue. This amount is adjusted in the final bill.' },
+    ],
+    parts: [
+      { id: 'part-ac-pipe-copper', name: 'Copper Pipe (per meter)', price: 950, description: 'High-quality copper piping for split AC installation. Price is charged per meter of length used.' },
+      { id: 'part-ac-pipe-drain', name: 'Drain Pipe (per meter)', price: 100, description: 'Flexible pipe to drain condensed water from the indoor unit. Charged per meter.' },
+      { id: 'part-ac-stand', name: 'Outdoor Unit Stand', price: 750, description: 'A sturdy metal stand for mounting the outdoor unit on a wall or floor.' },
+      { id: 'part-ac-remote', name: 'Universal AC Remote', price: 499, description: 'Compatible with over 1000 AC models from major brands. Easy to set up and use.' },
     ]
   },
   {
@@ -133,9 +138,11 @@ export const SERVICES: Service[] = [
         { id: 'fan-c-install', name: 'Ceiling Fan Installation', price: 199, description: 'Proper and safe installation of your new ceiling fan, ensuring balanced and quiet operation.' },
         { id: 'fan-e-install', name: 'Exhaust Fan Installation', price: 299, description: 'Installation of an exhaust fan in your kitchen or bathroom for better ventilation.' },
         { id: 'fan-c-repair', name: 'Ceiling Fan Repair (Inspection)', price: 249, description: 'Inspection charge to identify the root cause of any fan issue, like noise or slow speed.' },
-        { id: 'fan-capacitor', name: 'Capacitor Replacement', price: 180, description: 'Replacement of a faulty capacitor to fix slow fan speed and restore performance.' },
-        { id: 'fan-bearing', name: 'Bearing Replacement (Noise Fix)', price: 449, description: 'Fixes annoying rattling or grinding noises by replacing worn-out ball bearings.' },
-        { id: 'fan-regulator', name: 'Regulator Replacement', price: 149, description: 'Installation or replacement of a fan speed regulator switch on the switchboard.' },
+    ],
+    parts: [
+        { id: 'part-fan-capacitor', name: 'Fan Capacitor', price: 180, description: 'Replacement capacitor to fix slow fan speed and restore performance. Labor charges extra.' },
+        { id: 'part-fan-bearing', name: 'Fan Bearing Kit', price: 449, description: 'Fixes annoying rattling or grinding noises by replacing worn-out ball bearings. Labor charges extra.' },
+        { id: 'part-fan-regulator', name: 'Fan Regulator Switch', price: 149, description: 'A new regulator switch for the switchboard to control fan speed. Labor charges extra.' },
     ]
   },
   {
@@ -145,9 +152,12 @@ export const SERVICES: Service[] = [
     icon: <CoolerIcon className="w-12 h-12 text-primary" />,
     subServices: [
         { id: 'cooler-service', name: 'Cooler General Service', price: 399, description: 'Complete cleaning of the cooler, water tank, and cooling pads for fresh, cool air.' },
-        { id: 'cooler-motor', name: 'Motor Replacement', price: 899, description: 'Replacement of a burnt-out or non-functional cooler fan motor.' },
-        { id: 'cooler-pump', name: 'Water Pump Replacement', price: 499, description: 'Replacement of the water pump if it\'s not lifting water to the cooling pads.' },
-        { id: 'cooler-pads', name: 'Cooling Pad Replacement', price: 299, description: 'Replacement of old wood wool or honeycomb pads for better cooling efficiency.' },
+        { id: 'cooler-motor-repair', name: 'Motor Repair (Inspection)', price: 299, description: 'Inspection and repair of cooler fan motor issues.' },
+    ],
+    parts: [
+        { id: 'part-cooler-pump', name: 'Cooler Water Pump', price: 499, description: 'Replacement water pump if it\'s not lifting water to the cooling pads. Labor charges extra.' },
+        { id: 'part-cooler-pads-honey', name: 'Honeycomb Cooling Pads (Set)', price: 899, description: 'High-efficiency honeycomb pads for better and long-lasting cooling. Price varies by size.' },
+        { id: 'part-cooler-pads-wood', name: 'Wood Wool Pads (Set)', price: 299, description: 'Cost-effective wood wool (khus) pads. Price varies by cooler size.' },
     ]
   },
   {
@@ -158,10 +168,12 @@ export const SERVICES: Service[] = [
     subServices: [
         { id: 'app-fridge', name: 'Refrigerator Repair (Inspection)', price: 299, description: 'Our technician will visit and diagnose the problem. Fee is adjusted in the final bill.' },
         { id: 'app-fridge-gas', name: 'Refrigerator Gas Charging', price: 2199, description: 'Refilling refrigerant gas in your fridge to solve cooling problems. Includes leak detection.' },
-        { id: 'app-fridge-thermo', name: 'Refrigerator Thermostat Change', price: 799, description: 'Fixes issues of too much or no cooling by replacing the thermostat.' },
         { id: 'app-wm', name: 'Washing Machine Repair (Inspection)', price: 299, description: 'A standard inspection charge for diagnosing any issue with your washing machine.' },
-        { id: 'app-wm-drain', name: 'Washing Machine Drainage Problem', price: 499, description: 'Clearing blockages or repairing parts to fix water drainage problems in your machine.' },
-        { id: 'app-wm-spin', name: 'Washing Machine Not Spinning', price: 599, description: 'Resolving issues that prevent the drum from spinning during the wash or dry cycle.' },
+    ],
+    parts: [
+        { id: 'part-wm-pipe-inlet', name: 'Washing Machine Inlet Pipe (3m)', price: 349, description: 'Durable, high-quality inlet hose for all top and front load washing machines.' },
+        { id: 'part-wm-pipe-outlet', name: 'Washing Machine Outlet Pipe (3m)', price: 249, description: 'Flexible drain pipe for washing machines.' },
+        { id: 'part-fridge-gasket', name: 'Refrigerator Door Gasket (Medium)', price: 899, description: 'High-quality magnetic door seal to improve cooling and save energy. Please verify size before ordering.' },
     ]
   },
   {
@@ -173,7 +185,9 @@ export const SERVICES: Service[] = [
         { id: 'app-geyser-install', name: 'Geyser Installation', price: 449, description: 'Safe and secure wall-mounting and connection of your new water geyser.' },
         { id: 'app-geyser-repair', name: 'Geyser Repair (Inspection)', price: 249, description: 'Inspection charge to find the fault with your geyser, such as no heating.' },
         { id: 'heater-inspect', name: 'Room Heater Inspection', price: 199, description: 'A visit to diagnose and identify the problem with your room heater.' },
-        { id: 'heater-element', name: 'Heating Element Change', price: 499, description: 'Replacement of the heating element or coil if the heater is not producing heat.' },
+    ],
+    parts: [
+        { id: 'part-geyser-element', name: 'Geyser Heating Element (2000W)', price: 799, description: 'Copper heating element for 15-25L storage geysers. Provides fast heating.' },
     ]
   },
   {
@@ -183,9 +197,13 @@ export const SERVICES: Service[] = [
     icon: <WaterPurifierIcon className="w-12 h-12 text-primary" />,
     subServices: [
         { id: 'ro-service', name: 'Complete RO Service', price: 599, description: 'Full service including cleaning of all filters, pipes, and the storage tank for pure water.' },
-        { id: 'ro-filters', name: 'Filter Cartridge Change', price: 349, description: 'Replacement of sediment, carbon, or other pre-filters. Does not include RO membrane.' },
         { id: 'ro-install', name: 'RO Installation', price: 499, description: 'Professional installation and setup of your new RO or UV water purifier.' },
         { id: 'ro-repair', name: 'RO Repair (Inspection)', price: 249, description: 'Inspection charge for our technician to diagnose any issue with your water purifier.' },
+    ],
+    parts: [
+        { id: 'part-ro-filter-sediment', name: 'Sediment Pre-Filter', price: 299, description: 'Removes sand, silt, and rust particles. Universal size fits most RO purifiers.' },
+        { id: 'part-ro-filter-carbon', name: 'Activated Carbon Filter', price: 449, description: 'Removes chlorine and organic impurities, improving taste and odor.' },
+        { id: 'part-ro-membrane', name: 'RO Membrane', price: 1799, description: 'High-performance RO membrane for removing dissolved solids, salts, and heavy metals.' },
     ]
   },
   {
@@ -196,7 +214,10 @@ export const SERVICES: Service[] = [
     subServices: [
         { id: 'microwave-inspect', name: 'Microwave Repair (Inspection)', price: 299, description: 'A visit charge to diagnose the problem with your microwave oven.' },
         { id: 'microwave-noheat', name: 'Not Heating Repair', price: 799, description: 'Repairing the magnetron or other parts to fix the issue of food not heating.' },
-        { id: 'microwave-plate', name: 'Turntable Motor Repair', price: 499, description: 'Repair or replacement of the motor that rotates the glass plate inside the oven.' },
+    ],
+    parts: [
+        { id: 'part-microwave-motor', name: 'Turntable Motor', price: 499, description: 'Replacement motor for the rotating glass plate inside the oven. Labor extra.' },
+        { id: 'part-microwave-plate', name: 'Microwave Glass Turntable Plate (270mm)', price: 649, description: 'Sturdy glass plate for microwave ovens. Ensure size compatibility before purchase.' },
     ]
   },
   {
@@ -216,10 +237,13 @@ export const SERVICES: Service[] = [
     description: 'Safe and secure installation and upgrade of main switchboards and circuit breakers.',
     icon: <BoardIcon className="w-12 h-12 text-primary" />,
     subServices: [
-        { id: 'board-switch-replace', name: 'Switch/Socket Replacement', price: 99, description: 'Replacement of a single broken or faulty switch or socket on an existing board.' },
         { id: 'board-install', name: 'New Switchboard Installation', price: 699, description: 'Installation of a brand new switchboard with switches and sockets.' },
-        { id: 'board-mcb-replace', name: 'MCB Replacement', price: 199, description: 'Replacing a faulty or tripped Miniature Circuit Breaker (MCB) in your distribution box.' },
-        { id: 'board-fuse-replace', name: 'Fuse Replacement', price: 149, description: 'Replacing a blown fuse to restore power to a circuit.' },
+    ],
+    parts: [
+        { id: 'part-board-switch', name: 'Switch Replacement (per piece)', price: 99, description: 'Replacement of a single broken or faulty switch on an existing board.' },
+        { id: 'part-board-socket', name: 'Socket Replacement (per piece)', price: 129, description: 'Replacement of a single broken or faulty socket on an existing board.' },
+        { id: 'part-board-mcb', name: 'MCB Replacement', price: 199, description: 'Replacing a faulty or tripped Miniature Circuit Breaker (MCB) in your distribution box.' },
+        { id: 'part-board-fuse', name: 'Fuse Replacement', price: 149, description: 'Replacing a blown fuse to restore power to a circuit.' },
     ]
   },
   {
@@ -228,10 +252,12 @@ export const SERVICES: Service[] = [
     description: 'Comprehensive plumbing solutions from leaky faucets to major pipe installations.',
     icon: <PlumbingIcon className="w-12 h-12 text-primary" />,
     subServices: [
-        { id: 'plumb-faucet', name: 'Faucet/Tap Replacement', price: 249, description: 'Removal of an old tap or faucet and installation of a new one in the kitchen or bathroom.' },
         { id: 'plumb-leak', name: 'Minor Leakage Repair', price: 349, description: 'Fixing minor water leakages from pipes, taps, or joints to prevent water wastage.' },
-        { id: 'plumb-toilet', name: 'Toilet Jet Spray Installation', price: 199, description: 'Installation or replacement of a toilet jet spray or health faucet.' },
         { id: 'plumb-tank', name: 'Water Tank Cleaning', price: 599, description: 'Professional 5-step cleaning of your overhead water storage tank for clean water supply.' },
+    ],
+    parts: [
+        { id: 'part-plumb-faucet', name: 'Faucet/Tap Replacement', price: 249, description: 'Removal of an old tap or faucet and installation of a new one in the kitchen or bathroom. Part cost extra.' },
+        { id: 'part-plumb-jet', name: 'Toilet Jet Spray Installation', price: 199, description: 'Installation or replacement of a toilet jet spray or health faucet. Part cost extra.' },
     ]
   },
   {
@@ -243,8 +269,10 @@ export const SERVICES: Service[] = [
         { id: 'pump-sub-install', name: 'Submersible Pump Installation', price: 1299, description: 'Professional installation of submersible pumps for borewells or underground tanks.' },
         { id: 'pump-mono-install', name: 'Monoblock Pump Installation', price: 599, description: 'Setup and installation of surface monoblock pumps for boosting water pressure.' },
         { id: 'pump-repair-inspect', name: 'Pump Repair (Inspection)', price: 299, description: 'A standard visit fee to diagnose issues like not starting, low pressure, or leaks.' },
-        { id: 'pump-starter-repair', name: 'Starter/Panel Repair', price: 499, description: 'Fixing issues with the electrical starter, capacitor, or control panel for your pump.' },
         { id: 'pump-un-install', name: 'Pump Uninstallation/Removal', price: 499, description: 'Safe removal and disconnection of existing submersible or monoblock pumps.' },
+    ],
+    parts: [
+       { id: 'part-pump-starter-repair', name: 'Starter/Panel Repair', price: 499, description: 'Fixing issues with the electrical starter, capacitor, or control panel for your pump.' },
     ]
   },
   {
@@ -267,7 +295,9 @@ export const SERVICES: Service[] = [
     subServices: [
         { id: 'iron-inspect', name: 'Iron Repair (Inspection)', price: 149, description: 'A small fee to diagnose the problem with your clothes iron.' },
         { id: 'iron-no-heat', name: 'Not Heating Repair', price: 299, description: 'Repair or replacement of the heating element or thermostat to fix heating issues.' },
-        { id: 'iron-cord', name: 'Power Cord Replacement', price: 249, description: 'Replacing a damaged or frayed power cord to ensure safety and functionality.' },
+    ],
+    parts: [
+        { id: 'part-iron-cord', name: 'Iron Power Cord Replacement', price: 249, description: 'Replacing a damaged or frayed power cord to ensure safety and functionality.' },
     ]
   },
   {
@@ -277,8 +307,10 @@ export const SERVICES: Service[] = [
     icon: <AirPurifierIcon className="w-12 h-12 text-primary" />,
     subServices: [
         { id: 'ap-service', name: 'General Service & Cleaning', price: 399, description: 'Complete cleaning of the unit and pre-filters to ensure optimal performance.' },
-        { id: 'ap-filter', name: 'Filter Replacement (HEPA, Carbon)', price: 249, description: 'Installation of new filters. Price is for labor only; filter cost is extra.' },
         { id: 'ap-inspect', name: 'Air Purifier Repair (Inspection)', price: 249, description: 'Diagnosing issues like unusual noise, low airflow, or power problems.' },
+    ],
+     parts: [
+        { id: 'part-ap-filter', name: 'Filter Replacement Labor', price: 249, description: 'Installation of new filters. Price is for labor only; filter cost is extra.' },
     ]
   },
   {
@@ -288,8 +320,11 @@ export const SERVICES: Service[] = [
     icon: <BlenderIcon className="w-12 h-12 text-primary" />,
     subServices: [
         { id: 'mixer-inspect', name: 'Mixer/Blender Repair (Inspection)', price: 199, description: 'A visit to diagnose the issue with your mixer, grinder, or blender.' },
-        { id: 'mixer-jar', name: 'Jar Leakage/Blade Repair', price: 299, description: 'Fixing leaks from the jar or replacing the blade assembly or coupler.' },
         { id: 'mixer-motor', name: 'Motor Repair / Carbon Change', price: 499, description: 'Addressing issues with the motor, such as sparks, smoke, or complete failure.' },
+    ],
+    parts: [
+        { id: 'part-mixer-coupler', name: 'Mixer Jar Coupler (Set of 2)', price: 149, description: 'Durable rubber and plastic couplers for mixer grinder jars. Compatible with popular brands.' },
+        { id: 'part-mixer-jar-blade', name: 'Jar Blade Assembly', price: 299, description: 'Fixing leaks from the jar by replacing the blade assembly or coupler.' },
     ]
   },
   {
@@ -302,7 +337,7 @@ export const SERVICES: Service[] = [
         { id: 'mw-hinge', name: 'Door Hinge/Handle Repair', price: 149, description: 'Fixing loose hinges, handles, or latches on doors and cabinets.' },
         { id: 'mw-assembly', name: 'Minor Furniture Assembly', price: 399, description: 'Assembly of small, flat-pack furniture items like shelves or small tables.' },
         { id: 'mw-curtain', name: 'Curtain Rod Installation', price: 249, description: 'Installation of a single curtain rod with brackets and support.' },
-        { id: 'mw-general', name: 'General Handyman (Inspection)', price: 199, description: 'For any other small tasks. Our technician will assess and quote on site.' },
+        { id: 'mw-general', name: 'General Handyman (Inspection)', price: 199, description: 'For any other tasks. Our technician will assess and quote on site.' },
     ]
   },
 ];
