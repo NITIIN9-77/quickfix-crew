@@ -1,6 +1,6 @@
 {
-  "name": "Provo",
-  "description": "A modern web application for home repair and maintenance services. Users can browse services, order genuine appliance parts, get their location automatically, book appointments, and chat with a virtual assistant powered by Gemini.",
+  "name": "Fixuno",
+  "description": "Fixuno - Your #1 Home Service Partner. Expert repairs, installation, and maintenance at your doorstep.",
   "requestFramePermissions": [
     "geolocation"
   ]

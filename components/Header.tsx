@@ -55,13 +55,12 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center group cursor-pointer">
-             <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+             {/* Fixuno Logo Icon - Bolt/Wrench */}
+             <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M3 12h4.5l4.5 -9l4.5 9h4.5" />
-                <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7" />
-                <path d="M12 12v9" />
+                <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" />
              </svg>
-            <span className="ml-3 text-2xl font-bold text-textPrimary transition-transform duration-300 group-hover:scale-105">Provo</span>
+            <span className="ml-3 text-2xl font-bold text-textPrimary transition-transform duration-300 group-hover:scale-105 tracking-wider uppercase">FIXUNO</span>
           </a>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#services" className="text-textSecondary hover:text-primary transition-colors duration-200">Services</a>

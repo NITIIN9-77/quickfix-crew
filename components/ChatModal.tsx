@@ -10,7 +10,7 @@ interface ChatModalProps {
 
 const ChatModal: React.FC<ChatModalProps> = ({ isOpen, onClose, onOpen }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hello! I'm Techie, your virtual assistant. How can I help you with our services today?" }
+    { role: 'model', text: "Hello! I'm Uno, your Fixuno assistant. How can I help you with our services today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +60,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ isOpen, onClose, onOpen }) => {
       {isOpen && (
         <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 w-[calc(100%-2rem)] md:w-96 h-[70vh] max-h-[600px] bg-surface rounded-lg shadow-2xl flex flex-col z-50 animate-slide-in-up">
           <header className="bg-primary text-white p-4 flex justify-between items-center rounded-t-lg">
-            <h3 className="font-bold text-lg">Chat with a Technician</h3>
+            <h3 className="font-bold text-lg">Fixuno Assistant</h3>
             <button onClick={onClose} aria-label="Close chat" className="text-white hover:opacity-75">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -96,7 +96,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ isOpen, onClose, onOpen }) => {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask a question..."
+                placeholder="Ask Uno a question..."
                 className="flex-1 px-3 py-2 bg-background border border-slate-600 rounded-l-md focus:outline-none focus:ring-primary focus:border-primary text-textPrimary"
                 disabled={isLoading}
               />
