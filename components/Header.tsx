@@ -64,6 +64,7 @@ const Header: React.FC = () => {
           </a>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#services" className="text-textSecondary hover:text-primary transition-colors duration-200">Services</a>
+            <a href="#reviews" className="text-textSecondary hover:text-primary transition-colors duration-200">Reviews</a>
             <a href="#footer" className="text-textSecondary hover:text-primary transition-colors duration-200">Contact</a>
             <div className="relative" ref={dropdownRef}>
                 <button 

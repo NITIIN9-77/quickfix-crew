@@ -2,6 +2,7 @@
   "name": "Fixuno",
   "description": "Fixuno - Your #1 Home Service Partner. Expert repairs, installation, and maintenance at your doorstep.",
   "requestFramePermissions": [
-    "geolocation"
+    "geolocation",
+    "camera"
   ]
 }

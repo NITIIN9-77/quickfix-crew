@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import Reviews from './components/Reviews';
 import BookingForm from './components/BookingForm';
 import ChatModal from './components/ChatModal';
 import Footer from './components/Footer';
@@ -88,6 +90,7 @@ const App: React.FC = () => {
           }
         }} />
         <Services onViewDetails={handleViewDetails} />
+        <Reviews />
       </main>
       <Footer />
 
