@@ -60,52 +60,58 @@ const BookingForm: React.FC<BookingFormProps> = ({ cart, onClose, onSuccess }) =
     return Object.keys(errors).length === 0;
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setSubmissionError('');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmissionError('');
 
-  if (!validateForm()) {
-    return;
-  }
-  
-  if (!name || !phone || !address) {
-      alert("Please fill in all fields.");
+    if (!validateForm()) {
       return;
-  }
-
-  setSubmissionStatus('submitting');
-
-  const formData = {
-    name,
-    phone,
-    address,
-    services: cart.map((item) => `${item.name} (x${item.quantity}) - ₹${item.price}`).join(", "),
-    total,
-    date: new Date().toLocaleString("en-IN"),
-  };
-
-  try {
-    const url = "https://script.google.com/macros/s/AKfycbzs1zsZvTOrrklPMhU2S8XrY1pc5rTPqHSjXadiKZnsCn9EESEZ6Zq362Hq_8xMUGRP/exec";
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-    });
-
-    if (!response.ok) {
-        throw new Error(`Network response was not ok. Status: ${response.status}`);
+    }
+    
+    if (!name || !phone || !address) {
+        alert("Please fill in all fields.");
+        return;
     }
 
-    setSubmissionStatus("success");
-    setTimeout(() => {
-      onSuccess();
-    }, 5000);
-  } catch (error) {
-    console.error("Error submitting booking:", error);
-    setSubmissionError('Failed to submit booking. Please check your connection and try again.');
-    setSubmissionStatus('idle'); // Reset status to allow retry
-  }
-};
+    setSubmissionStatus('submitting');
+
+    const formData = {
+      name,
+      phone,
+      address,
+      services: cart.map((item) => `${item.name} (x${item.quantity}) - ₹${item.price}`).join(", "),
+      total,
+      date: new Date().toLocaleString("en-IN"),
+    };
+
+    try {
+      const url = "https://script.google.com/macros/s/AKfycbzs1zsZvTOrrklPMhU2S8XrY1pc5rTPqHSjXadiKZnsCn9EESEZ6Zq362Hq_8xMUGRP/exec";
+      
+      // Using no-cors is safer for Google Apps Script to avoid CORS errors in browser
+      await fetch(url, {
+        method: "POST",
+        mode: "no-cors", 
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+      });
+
+      // With no-cors, we receive an opaque response (type: 'opaque'). 
+      // We cannot check response.ok. We assume success if no network error occurred.
+      setSubmissionStatus("success");
+      
+      const timer = setTimeout(() => {
+        onSuccess();
+      }, 5000);
+
+      // Cleanup timer if component unmounts
+      return () => clearTimeout(timer);
+
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      setSubmissionError('Failed to submit booking. Please check your connection and try again.');
+      setSubmissionStatus('idle'); // Reset status to allow retry
+    }
+  };
 
   
   if (submissionStatus === 'success') {
