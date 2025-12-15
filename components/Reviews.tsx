@@ -98,7 +98,7 @@ const Reviews: React.FC = () => {
   };
 
   return (
-    <section id="reviews" className="py-16 sm:py-24 bg-surface border-t border-slate-700">
+    <section id="reviews" className="py-16 sm:py-24 bg-surface border-t border-slate-700 scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-textPrimary">Customer Reviews</h2>
