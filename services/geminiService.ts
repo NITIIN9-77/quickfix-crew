@@ -1,5 +1,4 @@
 
-
 import { GoogleGenAI, Chat } from "@google/genai";
 import type { ChatMessage } from '../types';
 
@@ -8,10 +7,20 @@ let chat: Chat | null = null;
 
 const getAI = () => {
   if (!ai) {
-    if (!process.env.API_KEY) {
-      throw new Error("API_KEY environment variable not set");
+    // Safe check for process.env to prevent "process is not defined" error in some browser environments
+    let apiKey: string | undefined;
+    try {
+        if (typeof process !== 'undefined' && process.env) {
+            apiKey = process.env.API_KEY;
+        }
+    } catch (e) {
+        console.warn("Could not access process.env");
     }
-    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+    if (!apiKey) {
+      throw new Error("API_KEY environment variable not set or not accessible");
+    }
+    ai = new GoogleGenAI({ apiKey });
   }
   return ai;
 };
@@ -34,10 +43,10 @@ export const getChatResponse = async (message: string): Promise<string> => {
       chat = initializeChat();
     }
     const response = await chat.sendMessage({ message });
-    return response.text;
+    return response.text || "I didn't get a response. Please try again.";
   } catch (error) {
     console.error("Gemini API error:", error);
-    return "I'm sorry, I'm having trouble connecting right now. Please try again later.";
+    return "I'm sorry, I'm having trouble connecting right now. Please check your internet connection or try again later.";
   }
 };
 
@@ -54,7 +63,7 @@ export const getServiceExplanation = async (serviceName: string, subServiceName:
       },
     });
 
-    return response.text;
+    return response.text || "Service details currently unavailable.";
   } catch (error) {
     console.error("Gemini API error (getServiceExplanation):", error);
     throw new Error("Failed to get service explanation from Gemini API.");

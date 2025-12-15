@@ -93,13 +93,8 @@ const Reviews: React.FC = () => {
 
     setReviews([reviewToAdd, ...reviews]);
     setNewReview({ name: '', text: '', rating: 0 });
-    // We don't revoke the object URL here so it can be displayed in the list, 
-    // but in a real app, you would upload to a server.
-    setSelectedImage(null);
-    setImagePreview(null); 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    // Clear image state
+    handleRemoveImage();
     setIsFormOpen(false);
   };
 
@@ -116,6 +111,7 @@ const Reviews: React.FC = () => {
         {/* Write a Review Button */}
         <div className="flex justify-center mb-10">
           <button
+            type="button"
             onClick={() => setIsFormOpen(!isFormOpen)}
             className="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:brightness-110 transition-all flex items-center"
           >

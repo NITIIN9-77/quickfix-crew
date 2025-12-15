@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import type { CartItem } from '../types';
 
@@ -145,7 +146,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   return (
     <div className="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in" onClick={onClose}>
       <div className="bg-surface rounded-lg shadow-2xl p-8 w-full max-w-lg m-4 relative animate-slide-in-up" onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose} aria-label="Close" className="absolute top-4 right-4 text-gray-400 hover:text-gray-200">
+        <button type="button" onClick={onClose} aria-label="Close" className="absolute top-4 right-4 text-gray-400 hover:text-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
