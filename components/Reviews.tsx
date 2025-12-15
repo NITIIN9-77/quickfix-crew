@@ -83,7 +83,7 @@ const Reviews: React.FC = () => {
     }
 
     const reviewToAdd: Review = {
-      id: reviews.length + 1,
+      id: Date.now(), // Use timestamp for unique ID to avoid key errors
       name: newReview.name,
       rating: newReview.rating,
       text: newReview.text,
@@ -93,7 +93,13 @@ const Reviews: React.FC = () => {
 
     setReviews([reviewToAdd, ...reviews]);
     setNewReview({ name: '', text: '', rating: 0 });
-    handleRemoveImage();
+    // We don't revoke the object URL here so it can be displayed in the list, 
+    // but in a real app, you would upload to a server.
+    setSelectedImage(null);
+    setImagePreview(null); 
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
     setIsFormOpen(false);
   };
 
