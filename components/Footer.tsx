@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-2 text-textSecondary">
               <li>Email: support@fixuno.com</li>
-              <li>Phone: (123) 456-7890</li>
+              <li>Phone: 8423979371</li>
               <li>Address: 123 Service Lane, Your City</li>
             </ul>
           </div>
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
            <div>
             <h3 className="text-xl font-bold mb-4">Follow Us</h3>
             <div className="flex justify-center md:justify-start space-x-6">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-textSecondary hover:text-primary transition-colors animate-subtle-glow rounded-full p-1">
+                <a href="https://www.instagram.com/fixunmultiservice/" target="_blank" rel="noopener noreferrer" className="text-textSecondary hover:text-primary transition-colors animate-subtle-glow rounded-full p-1">
                     <InstagramIcon className="w-7 h-7" />
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-textSecondary hover:text-primary transition-colors animate-subtle-glow rounded-full p-1">

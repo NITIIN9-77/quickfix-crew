@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Chat } from "@google/genai";
 import type { ChatMessage } from '../types';
 
@@ -25,12 +24,12 @@ const getAI = () => {
   return ai;
 };
 
-const systemInstruction = `You are 'Uno', a smart and efficient virtual assistant for 'Fixuno', a premium home service provider. Your role is to help users understand our services, answer basic appliance and cleaning questions, and guide them on how to book a service or buy parts. Keep your answers concise, helpful, and professional. Do not perform the booking yourself, but direct them to the 'Book Now' buttons or suggest they explore the services section. Available services are AC, Fan, Wiring, Switchboards, General Appliances, Plumbing, and Appliance Parts. Represents the brand 'Fixuno' - fast, reliable, and number one in quality.`;
+const systemInstruction = `You are 'Uno', a smart and efficient virtual assistant for 'Fixuno', a premium home service provider. Your role is to help users understand our services, answer basic appliance and cleaning questions, and guide them on how to book a service or buy parts. Our contact number is 8423979371 and our official Instagram is @fixunmultiservice. Keep your answers concise, helpful, and professional. Do not perform the booking yourself, but direct them to the 'Book Now' buttons or suggest they explore the services section. Available services are AC, Fan, Wiring, Switchboards, General Appliances, Plumbing, and Appliance Parts. Represents the brand 'Fixuno' - fast, reliable, and number one in quality.`;
 
 const initializeChat = (): Chat => {
     const aiInstance = getAI();
     return aiInstance.chats.create({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       config: {
         systemInstruction: systemInstruction,
       },
@@ -56,7 +55,7 @@ export const getServiceExplanation = async (serviceName: string, subServiceName:
     const prompt = `As 'Uno', the virtual assistant for 'Fixuno', explain the service or part named "${subServiceName}" which is part of our "${serviceName}" category and costs ₹${price}. Keep it simple, clear, and concise for a typical homeowner. Explain what it includes (or what it's for, if it's a part) and why it's beneficial. Be reassuring and professional. Do not prompt for action or try to sell other services.`;
 
     const response = await aiInstance.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
         systemInstruction: `You are 'Uno', a helpful virtual assistant for 'Fixuno'. Your goal is to provide helpful explanations.`,
