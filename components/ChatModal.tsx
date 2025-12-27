@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { getChatResponse } from '../services/geminiService';
 import type { ChatMessage } from '../types';
@@ -48,7 +49,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ isOpen, onClose, onOpen }) => {
       {!isOpen && (
         <button 
           onClick={onOpen} 
-          className="fixed bottom-4 right-4 bg-primary text-white rounded-full p-4 shadow-lg hover:brightness-110 transition-transform transform hover:scale-110 z-50 animate-glow"
+          className="fixed top-20 right-4 bg-primary text-white rounded-full p-4 shadow-lg hover:brightness-110 transition-transform transform hover:scale-110 z-50 animate-glow"
           aria-label="Open chat assistant"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +59,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ isOpen, onClose, onOpen }) => {
       )}
 
       {isOpen && (
-        <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 w-[calc(100%-2rem)] md:w-96 h-[70vh] max-h-[600px] bg-surface rounded-lg shadow-2xl flex flex-col z-50 animate-slide-in-up">
+        <div className="fixed top-20 right-4 md:top-24 md:right-8 w-[calc(100%-2rem)] md:w-96 h-[70vh] max-h-[600px] bg-surface rounded-lg shadow-2xl flex flex-col z-50 animate-scale-up-fade-in">
           <header className="bg-primary text-white p-4 flex justify-between items-center rounded-t-lg">
             <h3 className="font-bold text-lg">Fixuno Assistant</h3>
             <button onClick={onClose} aria-label="Close chat" className="text-white hover:opacity-75">
