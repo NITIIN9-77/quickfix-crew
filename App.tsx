@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -19,6 +18,27 @@ const App: React.FC = () => {
   // Data states
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
+
+  // Back Button Logic: Handle mobile back button to close modals
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (isServiceDetailOpen || isBookingFormOpen || isChatModalOpen) {
+        setIsServiceDetailOpen(false);
+        setIsBookingFormOpen(false);
+        setIsChatModalOpen(false);
+        // Prevent default browser back behavior since we've "handled" it by closing modals
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    
+    // Push state when any modal opens
+    if (isServiceDetailOpen || isBookingFormOpen || isChatModalOpen) {
+      window.history.pushState({ modalOpen: true }, '');
+    }
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isServiceDetailOpen, isBookingFormOpen, isChatModalOpen]);
 
   // Open service details modal
   const handleViewDetails = (service: Service) => {
@@ -40,26 +60,20 @@ const App: React.FC = () => {
     }
   };
 
-  // This function is for cancelling the booking or closing the modal
   const closeBookingForm = () => {
     setIsBookingFormOpen(false);
-    // The cart is no longer cleared here to preserve the user's selections
   };
   
-  // This function is called only on successful submission
   const handleBookingSuccess = () => {
     setIsBookingFormOpen(false);
-    setCart([]); // Clear cart after successful booking
+    setCart([]); 
     setSelectedService(null);
   };
 
-
-  // Cart management functions
   const handleAddToCart = (subService: SubService, parentServiceName: string) => {
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === subService.id);
       if (existingItem) {
-        // This case is handled by the quantity updater, but as a fallback
         return prevCart.map(item =>
           item.id === subService.id ? { ...item, quantity: item.quantity + 1 } : item
         );

@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 
 interface Review {
@@ -23,31 +22,8 @@ const StarIcon: React.FC<{ filled: boolean; className?: string; onClick?: () => 
 );
 
 const Reviews: React.FC = () => {
-  // Mock initial reviews
-  const [reviews, setReviews] = useState<Review[]>([
-    {
-      id: 1,
-      name: "Rahul Sharma",
-      rating: 5,
-      text: "Excellent AC service! The technician was very professional and cleaned everything thoroughly. My AC cools like new now.",
-      date: "Oct 12, 2023",
-      image: "https://images.unsplash.com/photo-1581094794329-cd670ce6a170?q=80&w=400&auto=format&fit=crop"
-    },
-    {
-      id: 2,
-      name: "Priya Singh",
-      rating: 4,
-      text: "Good experience with washing machine repair. They arrived on time and fixed the drainage issue quickly.",
-      date: "Nov 05, 2023"
-    },
-    {
-      id: 3,
-      name: "Amit Patel",
-      rating: 5,
-      text: "The electrician did a great job re-wiring my kitchen. Very safe and neat work. Highly recommended!",
-      date: "Dec 01, 2023"
-    }
-  ]);
+  // Cleared initial mock reviews as requested
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [newReview, setNewReview] = useState({ name: '', text: '', rating: 0 });
@@ -83,7 +59,7 @@ const Reviews: React.FC = () => {
     }
 
     const reviewToAdd: Review = {
-      id: Date.now(), // Use timestamp for unique ID to avoid key errors
+      id: Date.now(),
       name: newReview.name,
       rating: newReview.rating,
       text: newReview.text,
@@ -93,7 +69,6 @@ const Reviews: React.FC = () => {
 
     setReviews([reviewToAdd, ...reviews]);
     setNewReview({ name: '', text: '', rating: 0 });
-    // Clear image state
     handleRemoveImage();
     setIsFormOpen(false);
   };
@@ -104,18 +79,19 @@ const Reviews: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-textPrimary">Customer Reviews</h2>
           <p className="mt-4 text-lg text-textSecondary max-w-2xl mx-auto">
-            See what our happy customers are saying about our services.
+            {reviews.length > 0 
+              ? "See what our happy customers are saying about our services."
+              : "Be the first to leave a review for our premium services!"}
           </p>
         </div>
 
-        {/* Write a Review Button */}
         <div className="flex justify-center mb-10">
           <button
             type="button"
             onClick={() => setIsFormOpen(!isFormOpen)}
             className="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:brightness-110 transition-all flex items-center"
           >
-            <span className="mr-2">{isFormOpen ? 'Cancel Review' : 'Write a Review'}</span>
+            <span className="mr-2">{isFormOpen ? 'Cancel' : 'Write a Review'}</span>
             {!isFormOpen && (
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -124,7 +100,6 @@ const Reviews: React.FC = () => {
           </button>
         </div>
 
-        {/* Review Form */}
         {isFormOpen && (
           <div className="max-w-2xl mx-auto mb-16 bg-background p-6 rounded-lg border border-slate-600 animate-slide-in-up">
             <h3 className="text-xl font-bold text-textPrimary mb-4">Share your experience</h3>
@@ -213,7 +188,6 @@ const Reviews: React.FC = () => {
           </div>
         )}
 
-        {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
             <div key={review.id} className="bg-background rounded-lg p-6 border border-slate-800 shadow-md hover:border-slate-600 transition-all">

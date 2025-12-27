@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
   return (
     <footer id="footer" className="bg-background border-t border-slate-700">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="md:col-span-1">
             <h3 className="text-xl font-bold mb-4 text-primary tracking-wider uppercase">FIXUNO</h3>
             <p className="text-textSecondary">Reliable. Fast. The one solution for all your home needs.</p>
@@ -33,17 +33,9 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-2 text-textSecondary">
-              <li>Email: support@fixuno.com</li>
+              <li>Email: fixuno628@gmail.com</li>
               <li>Phone: 8423979371</li>
-              <li>Address: 123 Service Lane, Your City</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Operating Hours</h3>
-            <ul className="space-y-2 text-textSecondary">
-              <li>Mon - Fri: 8:00 AM - 6:00 PM</li>
-              <li>Sat: 9:00 AM - 5:00 PM</li>
-              <li>Sun: Closed</li>
+              <li className="mt-4 text-primary font-semibold">All Day Open</li>
             </ul>
           </div>
            <div>
